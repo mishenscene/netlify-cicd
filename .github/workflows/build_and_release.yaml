@@ -1,0 +1,12 @@
+name: build_and_release
+
+on:
+    push
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - id: s00
+              run: echo "Starting build and release step, {date}"
+
