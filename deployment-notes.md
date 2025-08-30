@@ -36,11 +36,6 @@ sudo netlify init
 ```
 
 ```shell
-# Deploy in production environment
-sudo netlify deploy --prod --dir=/dist/countingbook/browser
-```
-
-```shell
 brew install act
 ```
 
@@ -49,6 +44,28 @@ brew install act
 act
 ```
 
+```shell
+# Deploy in production environment
+sudo netlify deploy --prod --dir=dist/countingbook
+```
+
+Store credentials in secrets on Github
+Settings -> Projects -> Secrets and variables -> Add Repository Secrets
+- NETLIFY_AUTH_TOKEN (personal_access_token)
+- NETLIFY_SITE_ID (project_id)
+
+Generate a personal access token
+Search "personal access token" -> Generate
+
+Locate site ID
+Click on netlify linked project -> Project Configuration -> Project ID
+
+```shell
+# Checks the secret dir .secrets
+act --help | grep secret
+```
+
+## Concepts
 Bond script &&, execute the first operation.
 IF the operation is successful, execute the next operation
 Success is determined based on exit code, e.g. 0 == SUCCESS
