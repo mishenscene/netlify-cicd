@@ -1,3 +1,5 @@
+# To mock a test failure, run: echo "faking an error " && exit 1
+
 name: build_and_release
 
 on: [push]
@@ -19,9 +21,10 @@ jobs:
             - id: s004
               uses: actions/checkout@v5
             # Install angular packages
-            # Bond script &&, execute the first operation.
-            # IF the operation is successful, execute the next operation
-            # Success is determined based on exit code, e.g. 0 == SUCCESS
             - id: s005
               run: npm i -g @angular/cli && npm ci && echo "Installed"
+            - id: s006
+              run: ng build
+            - id: s007
+              run: ls -l /dist/countingbook/browser
 
