@@ -27,4 +27,11 @@ jobs:
               run: ng build
             - id: s007
               run: ls -l /dist/countingbook/browser
-
+            - id: s008
+              uses: nwtgck/actions-netlify@v3.0
+              with:
+                publish-dir: dist/countingbook/browser
+                production-deploy: true
+              env:
+                NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
+                NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
