@@ -1,12 +1,27 @@
 name: build_and_release
 
-on:
-    push
+on: [push]
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - id: s00
-              run: echo "Starting build and release step, {date}"
+            - id: s001
+              run: echo "github ${{ github.ref_name }}"
+            - run: echo "before " && ls -l
+            - id: s002
+              uses: actions/setup-node@v4
+              with:
+                node-version: 22
+            - id: s003
+              run: echo "after " && ls -l
+            # Required for GitHub Actions, not GitLab
+            - id: s004
+              uses: actions/checkout@v5
+            # Install angular packages
+            # Bond script &&, execute the first operation.
+            # IF the operation is successful, execute the next operation
+            # Success is determined based on exit code, e.g. 0 == SUCCESS
+            - id: s005
+              run: npm i -g @angular/cli && npm ci && echo "Installed"
 

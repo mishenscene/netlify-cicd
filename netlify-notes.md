@@ -1,39 +1,47 @@
-## Building CICD Workflow via GitHub Actions
-
-### Terms
-CICD -- Continuous Integration and Continuous Delivery
+## Deploying an Application via GitHub Actions
 
 ### Notes
 
-#### Building a workflow with a basic step
-Entrypoint in Gitlab - /config/yml
-GitHub searches the root of the repository (.git)
+#### Installing packages
 
 ```shell
-# Create .github directory to mark as root
-mkdir -p .github/workflows
+# Install packages
+npm i
 ```
 
 ```shell
-# Create a yaml workflow
-cat hello_world.yaml
+# Run application on localhost
+ng serve
 ```
 
-Upon push, the github action step will be ran
-The steps are run sequentially, so the remaining steps will be skipped, should any of the steps fail
+```shell
+# Compile the application
+ng build
+```
 
-In GitLab, the server is mounted automatically
-In GitHub, the server needs to be mounted manually
+The output file is under this dir - Output location: /Users/michelim/workshops/countingbook/dist/countingbook
 
-#### Prebuilt-Actions
-Pre-built actions are docker containers
+Deploy the compiled application to Netlify
+```shell
+# Authenticate netlify credentials
+sudo netlify login
+```
 
-Use cases
-- Code signing during securities
+```shell
+sudo netlify build
+```
 
-On Linux, properties in a $ are an environment variable (...)
+```shell
+sudo netlify init
+```
+
+```shell
+# Deploy in production environment
+sudo netlify deploy --prod --dir=/dist/countingbook/browser
+```
+
+```shell
+act
+```
 
 ## Links
-[GitHub Actions | Documentation](https://docs.github.com/en/actions/get-started/understand-github-actions)
-[GitHub, Run a workflow | Documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
-[Cowsays](https://github.com/marketplace/actions/cowsays)
